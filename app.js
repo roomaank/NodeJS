@@ -32,7 +32,7 @@ fs.readdir(firstFolder, (err, files) => {
             console.log('data: ', JSON.parse(data.toString()))
             const parcedUser = JSON.parse(data.toString());
             if (parcedUser.gender === 'male'){
-                fs.rename(`${firstFolder}/${file}`, `${secondFolder}/${file}`, err => {
+                fs.rename(path.join(firstFolder, file), path.join(secondFolder, file) , err => {
                     if (err){
                         console.log(err);
                     }
