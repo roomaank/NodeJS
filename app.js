@@ -65,3 +65,46 @@ fs.readdir(secondFolder, (err, files) => {
         })
     })
 })
+
+// _______________________________________________________________________________________________
+// ЧОМУ ТАКИМ ЧИНОМ НЕ ВІДПРАЦЬОВУЄ???
+
+// const firstFolder = path.join(__dirname, '18-00')
+// const secondFolder = path.join(__dirname, '20-00')
+
+// fs.readdir(firstFolder, (err, files) => {
+//     if (err) {
+//         console.log(err);
+//         return;
+//     }
+//     files.forEach((file) => {
+//         makeAction(true);
+//     })
+// })
+
+// fs.readdir(secondFolder, (err, files) => {
+//     if (err) {
+//         console.log(err);
+//     }
+//     files.forEach((file) => {
+//         makeAction(false);
+//     })
+// })
+
+// function makeAction(isFirstFolder) {
+//     fs.readFile(path.join(firstFolder, file), (err, data) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         const parcedUser = JSON.parse(data.toString());
+//         if (parcedUser.gender === 'male'){
+//             fs.rename(path.join(isFirstFolder ? firstFolder : secondFolder, file), path.join(isFirstFolder ? secondFolder : firstFolder, file) , err => {
+//                 if (err){
+//                     console.log(err);
+//                 }
+//             })
+//         }
+//     })
+// }
+// _______________________________________________________________________________________________
