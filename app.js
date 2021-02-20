@@ -1,6 +1,7 @@
 const express = require('express');
-const path = require('path')
 const expressHbs = require('express-handlebars');
+const path = require('path')
+const fs = require('fs');
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.engine('.hbs', expressHbs({
 }))
 app.set('views', path.join(__dirname, 'views'))
 
-const users = [];
+const usersFilePath = path.join(__dirname, 'users.txt');
 
 // _________________________________________________________________________________________________________________________________
 app.get('/register', (req, res) => {
@@ -29,13 +30,43 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    users.push(req.body);
-    // res.json('User registered')
-    res.redirect('/users');
+    fs.readFile(usersFilePath, (err, success) => {
+        if (err){
+            console.log(err);
+            return;
+        }
+        const parsedUsers = JSON.parse(success.toString())  //array
+        parsedUsers.forEach((parsedUser) => {
+            if (parsedUser.email === req.body.email){
+                console.log('User exists');
+                return;
+            }
+        })
+        parsedUsers.push(req.body)
+        fs.writeFile(usersFilePath, JSON.stringify(parsedUsers), err => {
+            if (err){
+                console.log(err);
+            }
+        })
+        res.redirect('/users');
+    })
 })
 
 app.get('/users', (req, res) => {
-    res.render('users', {
-        users
+    fs.readFile(usersFilePath, (err, data) => {
+        if (err){
+            console.log(err);
+            return;
+        }
+        users = JSON.parse(data.toString());
+        res.render('users', {
+            users
+        })
     })
+})
+
+app.get('/users/:userId', (req, res) => {
+    const { userId } = req.params;
+    console.log(req.params);
+    res.json(users[userId]);
 })
