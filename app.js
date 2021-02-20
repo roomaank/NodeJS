@@ -90,9 +90,12 @@ app.post('/login', (req, res) => {
                     return;
                 }
                 users = JSON.parse(data.toString());
-                res.render('users', {
-                    users
-                })
+                // ????????????????????
+                // let userIndex = users.findIndex(user => user.email === req.body.email && user.password === req.body.password);
+                // if (userIndex){
+                //     res.render(`/users/${userIndex}`);
+                // }
+                // ????????????????????
             })
         } else {
             res.render('error', {
@@ -108,6 +111,5 @@ app.get('/users/:userId', (req, res) => {
     const {
         userId
     } = req.params;
-    console.log(req.params);
     res.json(users[userId]);
 })
