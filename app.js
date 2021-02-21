@@ -77,25 +77,21 @@ app.get('/login', (req, res) => {
 //login
 app.post('/login', (req, res) => {
     fs.readFile(usersFilePath, (err, success) => {
-        if (err){
+        if (err) {
             console.log(err);
             return;
         }
         const parsedUsers = JSON.parse(success.toString())
         const registeredUser = parsedUsers.some(user => user.email === req.body.email && user.password === req.body.password);
-        if (registeredUser){
+        if (registeredUser) {
             fs.readFile(usersFilePath, (err, data) => {
                 if (err) {
                     console.log(err);
                     return;
                 }
                 users = JSON.parse(data.toString());
-                // ????????????????????
-                // let userIndex = users.findIndex(user => user.email === req.body.email && user.password === req.body.password);
-                // if (userIndex){
-                //     res.render(`/users/${userIndex}`);
-                // }
-                // ????????????????????
+                let userIndex = users.findIndex(user => user.email === req.body.email && user.password === req.body.password);
+                res.redirect(`/users/${userIndex}`)
             })
         } else {
             res.render('error', {
@@ -110,6 +106,17 @@ app.post('/login', (req, res) => {
 app.get('/users/:userId', (req, res) => {
     const {
         userId
-    } = req.params;
-    res.json(users[userId]);
+    } = req.params
+    fs.readFile(usersFilePath, (err, data) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        const parsedUsersData = JSON.parse(data.toString());
+        console.log(parsedUsersData[userId]);
+
+        res.render('single-user', {
+            user: parsedUsersData[userId]
+        })
+    })
 })
