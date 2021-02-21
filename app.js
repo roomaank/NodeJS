@@ -43,15 +43,14 @@ app.post('/register', (req, res) => {
             res.render('error', {
                 error: 'User with this name already exists'
             })
-        } else {
-            parsedUsers.push(req.body)
-            fs.writeFile(usersFilePath, JSON.stringify(parsedUsers), err => {
-                if (err) {
-                    console.log(err);
-                }
-            })
-            res.redirect('/users');
         }
+        parsedUsers.push(req.body)
+        fs.writeFile(usersFilePath, JSON.stringify(parsedUsers), err => {
+            if (err) {
+                console.log(err);
+            }
+        })
+        res.redirect('/users');
     })
 })
 
@@ -93,12 +92,10 @@ app.post('/login', (req, res) => {
                 let userIndex = users.findIndex(user => user.email === req.body.email && user.password === req.body.password);
                 res.redirect(`/users/${userIndex}`)
             })
-        } else {
-            res.render('error', {
-                error: 'User is not registrated'
-            })
-
         }
+        res.render('error', {
+            error: 'User is not registrated'
+        })
     })
 })
 
