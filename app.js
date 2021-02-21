@@ -48,6 +48,7 @@ app.post('/register', (req, res) => {
         fs.writeFile(usersFilePath, JSON.stringify(parsedUsers), err => {
             if (err) {
                 console.log(err);
+                return;
             }
         })
         res.redirect('/users');
