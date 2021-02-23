@@ -1,11 +1,14 @@
-const user = require("../dataBase/user");
 const userService = require("../service/user.service");
 
 module.exports = {
   getAllUsers: (req, res) => {
-    const users = userService.findUsers();
+    try {
+      const users = userService.findUsers();
 
-    res.json(users);
+      res.json(users);
+    } catch (e) {
+      res.status(400).json(e.message);
+    }
   },
 
   getSingleUser: (req, res) => {
