@@ -1,4 +1,6 @@
 const userService = require("../service/user.service");
+const errorCode = require("../constant/errorCodes.enum");
+const successCode = require("../constant/successCodes.enum");
 
 module.exports = {
   getAllUsers: (req, res) => {
@@ -7,25 +9,41 @@ module.exports = {
 
       res.json(users);
     } catch (e) {
-      res.status(400).json(e.message);
+      res.status(errorCode.BAD_REQUEST).json(e.message);
     }
   },
 
   getSingleUser: (req, res) => {
-    const { userId } = req.params;
+    try {
+      const { userId } = req.params;
 
-    const user = userService.findUsersById(userId);
+      const user = userService.findUsersById(userId);
 
-    res.json(user);
+      res.json(user);
+    } catch (e) {
+      res.status(errCodes.BAD_REQUEST).json(e.message);
+    }
   },
 
   createUser: async (req, res) => {
-    userService.createUser(req.body);
+    try {
+      userService.createUser(req.body);
 
-    res.status(201).json("User is created");
+      res.status(successCode.CREATED).json("User is created");
+    } catch (e) {
+      res.status(errCodes.BAD_REQUEST).json(e.message);
+    }
   },
 
   deleteCurrentUser: (req, res) => {
-    res.json("User is deleted");
+    try {
+      const { userId } = req.params;
+
+      const user = userService.deleteUsersById(userId);
+
+      res.json(user);
+    } catch (e) {
+      res.status(errCodes.BAD_REQUEST).json(e.message);
+    }
   },
 };

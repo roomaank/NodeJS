@@ -12,7 +12,6 @@ module.exports = {
     const dataBase = await readFile(dataBasePath);
     console.log(JSON.parse(dataBase.toString()));
 
-    // return JSON.parse(dataBase.toString);
   },
 
   findUsersById: (userId) => {},

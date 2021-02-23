@@ -7,7 +7,7 @@ module.exports = {
       const userId = +req.params.userId;
 
       if (userId < 0 || !Number.isInteger(userId) || Number.isNaN(userId)) {
-        throw new Error("Not Valid");
+        throw new Error(errorMessages.NOT_VALID.en);
       }
 
       next();
@@ -18,14 +18,22 @@ module.exports = {
 
   isUserValid: (req, res, next) => {
     try {
-      const { name, password, preferLanguage = 'en' } = req.body;
+      const { name, password, email, preferLanguage = "en" } = req.body;
 
       if (!name || !password) {
-        throw new Error("Some field is empty");
+        throw new Error(errorMessages.EMPTY_FIELD[preferLanguage]);
       }
 
       if (password.length < 6) {
-        throw new Error(errorMessages.TOO_WEAK_PASSWORS[preferLanguage]);
+        throw new Error(errorMessages.TOO_WEAK_PASSWORD[preferLanguage]);
+      }
+
+      if (!email.includes("@")) {
+        throw new Error(errorMessages.NOT_VALID_EMAIL[preferLanguage]);
+      }
+
+      if (name.length < 3) {
+        throw new Error(errorMessages.NOT_VALID_NAME[preferLanguage]);
       }
 
       next();

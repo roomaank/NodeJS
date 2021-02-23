@@ -9,6 +9,6 @@ router.get("/:userId", userMiddleware.checkIsIdValid, userController.getSingleUs
 
 router.post("/", userMiddleware.isUserValid, userController.createUser);
 
-router.delete("/", userController.deleteCurrentUser);
+router.delete("/:userId", userMiddleware.checkIsIdValid, userController.deleteCurrentUser);
 
 module.exports = router;
