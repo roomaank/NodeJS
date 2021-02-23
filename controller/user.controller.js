@@ -19,13 +19,13 @@ module.exports = {
     res.json(user);
   },
 
-  createUser: (req, res) => {
+  createUser: async (req, res) => {
     userService.createUser(req.body);
 
     res.status(201).json("User is created");
   },
 
-  deleteUser: (req, res) => {
+  deleteCurrentUser: (req, res) => {
     res.json("User is deleted");
   },
 };
