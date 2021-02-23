@@ -1,1 +1,0 @@
-[{"name":"Roman","email":"roman@gmail.com","password":"test1"},{"name":"Oleg","email":"oleg@gmail.com","password":"test2"},{"email":"wreygfwryj@tyewfjv","name":"reEWBK","password":"RFVWERYJFVK"}]
