@@ -3,9 +3,9 @@ const errorCode = require("../constant/errorCodes.enum");
 const successCode = require("../constant/successCodes.enum");
 
 module.exports = {
-  getAllUsers: (req, res) => {
+  getAllUsers: async (req, res) => {
     try {
-      const users = userService.findUsers();
+      const users = await userService.findUsers();
 
       res.json(users);
     } catch (e) {
@@ -13,37 +13,38 @@ module.exports = {
     }
   },
 
-  getSingleUser: (req, res) => {
+  getSingleUser: async (req, res) => {
     try {
       const { userId } = req.params;
 
-      const user = userService.findUsersById(userId);
+      const user = await userService.findUsersById(userId);
 
       res.json(user);
     } catch (e) {
-      res.status(errCodes.BAD_REQUEST).json(e.message);
+      res.status(errorCode.BAD_REQUEST).json(e.message);
     }
   },
 
   createUser: async (req, res) => {
     try {
-      userService.createUser(req.body);
+      await userService.createUser(req.body);
 
       res.status(successCode.CREATED).json("User is created");
     } catch (e) {
-      res.status(errCodes.BAD_REQUEST).json(e.message);
+      res.status(errorCode.BAD_REQUEST).json(e.message);
     }
   },
 
-  deleteCurrentUser: (req, res) => {
+  deleteCurrentUser: async (req, res) => {
     try {
       const { userId } = req.params;
 
-      const user = userService.deleteUsersById(userId);
+      await userService.deleteUsersById(userId);
 
-      res.json(user);
+      res.status(successCode.CREATED).json("User is deleted");
     } catch (e) {
-      res.status(errCodes.BAD_REQUEST).json(e.message);
+      res.status(errorCode.BAD_REQUEST).json(e.message);
     }
   },
+
 };

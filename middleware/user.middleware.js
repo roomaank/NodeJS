@@ -32,7 +32,7 @@ module.exports = {
         throw new Error(errorMessages.NOT_VALID_EMAIL[preferLanguage]);
       }
 
-      if (name.length < 3) {
+      if (name.length < 2) {
         throw new Error(errorMessages.NOT_VALID_NAME[preferLanguage]);
       }
 
