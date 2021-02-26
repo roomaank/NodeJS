@@ -1,13 +1,12 @@
-const { json } = require("express");
-const fs = require("fs");
-const path = require("path");
-const { promisify } = require("util");
+const fs = require('fs');
+const path = require('path');
+const { promisify } = require('util');
 
-const errorMessage = require("../error/error.messages");
+const errorMessage = require('../error/error.messages');
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
-const dataBasePath = path.join(process.cwd(), "dataBase", "user.json");
+const dataBasePath = path.join(process.cwd(), 'dataBase', 'user.json');
 
 module.exports = {
   findUsers: async () => {

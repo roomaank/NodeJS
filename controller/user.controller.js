@@ -1,6 +1,7 @@
-const userService = require("../service/user.service");
-const errorCode = require("../constant/errorCodes.enum");
-const successCode = require("../constant/successCodes.enum");
+const userService = require('../service/user.service');
+const errorCode = require('../constant/errorCodes.enum');
+const successCode = require('../constant/successCodes.enum');
+const userStatus = require('../constant/user.status');
 
 module.exports = {
   getAllUsers: async (req, res) => {
@@ -29,7 +30,7 @@ module.exports = {
     try {
       await userService.createUser(req.body);
 
-      res.status(successCode.CREATED).json("User is created");
+      res.status(successCode.CREATED).json(userStatus.USER_IS_CREATED);
     } catch (e) {
       res.status(errorCode.BAD_REQUEST).json(e.message);
     }
@@ -41,7 +42,7 @@ module.exports = {
 
       await userService.deleteUsersById(userId);
 
-      res.status(successCode.CREATED).json("User is deleted");
+      res.status(successCode.CREATED).json(userStatus.USER_IS_DELETED);
     } catch (e) {
       res.status(errorCode.BAD_REQUEST).json(e.message);
     }

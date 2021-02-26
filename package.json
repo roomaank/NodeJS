@@ -1,24 +1,24 @@
 {
-  "name": "NodeJS",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  'name': 'NodeJS',
+  'version': '1.0.0',
+  'description': '',
+  'main': 'app.js',
+  'scripts': {
+    'test': 'echo \'Error: no test specified\' && exit 1'
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/roomaank/NodeJS.git"
+  'repository': {
+    'type': 'git',
+    'url': 'git+https://github.com/roomaank/NodeJS.git'
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/roomaank/NodeJS/issues"
+  'keywords': [],
+  'author': '',
+  'license': 'ISC',
+  'bugs': {
+    'url': 'https://github.com/roomaank/NodeJS/issues'
   },
-  "homepage": "https://github.com/roomaank/NodeJS#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "express-handlebars": "^5.2.1"
+  'homepage': 'https://github.com/roomaank/NodeJS#readme',
+  'dependencies': {
+    'express': '^4.17.1',
+    'express-handlebars': '^5.2.1'
   }
 }
